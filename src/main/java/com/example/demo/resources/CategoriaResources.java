@@ -17,7 +17,7 @@ public class CategoriaResources {
 	public List<categoria> listar() {
 		
 		categoria cat1 = new categoria(1, "informatica");
-		categoria cat2 = new categoria(1, "escritorio");
+		categoria cat2 = new categoria(2, "escritorio");
 		
 		List<categoria> lista = new ArrayList<>();
 		lista.add(cat1);
