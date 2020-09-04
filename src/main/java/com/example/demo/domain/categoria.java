@@ -8,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class categoria implements Serializable {
+public class Categoria implements Serializable {
 
 
 	private static final long serialVersionUID = 1L;
@@ -19,11 +19,11 @@ public class categoria implements Serializable {
 	
 	
 	
-	public categoria() {
+	public Categoria() {
 		
 	}
 
-	public categoria(Integer id, String name) {
+	public Categoria(Integer id, String name) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -61,7 +61,7 @@ public class categoria implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		categoria other = (categoria) obj;
+		Categoria other = (Categoria) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
