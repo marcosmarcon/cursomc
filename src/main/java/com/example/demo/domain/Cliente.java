@@ -16,6 +16,7 @@ import javax.persistence.OneToMany;
 
 import com.example.demo.domain.enums.TipoCliente;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Cliente implements Serializable {
@@ -27,29 +28,30 @@ public class Cliente implements Serializable {
 	private String nome;
 	private String email;
 	private String cpfOuCnpj;
-	private Integer tipo;
+	private Integer tipo; //  devido ao controle dos Enuns  tratamento um pouco diferente no construtor foi declarado como inteiro e mais abaixo esta como tipocliente
 	
+	//@JsonManagedReference esse em conjunto com o @JsonBackReference de cidade
 	@OneToMany(mappedBy="cliente")
 	private List<Endereco> enderecos = new ArrayList<>();
 	
 	@ElementCollection
 	@CollectionTable(name="TELEFONE")
-	private Set<String> telefones = new HashSet<>();
-/*	
+	private Set<String> telefones = new HashSet<>();// set conjunto nao duplica conteudo diferente de lista
+	
 	@JsonIgnore
 	@OneToMany(mappedBy="cliente")
 	private List<Pedido> pedidos = new ArrayList<>();
 	
 	public Cliente() {
 	}
-*/
+
 	public Cliente(Integer id, String nome, String email, String cpfOuCnpj, TipoCliente tipo) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.cpfOuCnpj = cpfOuCnpj;
-		this.tipo = tipo.getCod();
+		this.tipo = tipo.getCod(); // devido ao controle dos Enuns  cliente tem um tratamento um pouco diferente no construtor foi declarado como inteiro e aqui esta como tipocliente
 	}
 
 	public Integer getId() {
@@ -85,11 +87,11 @@ public class Cliente implements Serializable {
 	}
 
 	public TipoCliente getTipo() {
-		return TipoCliente.toEnum(tipo);
+		return TipoCliente.toEnum(tipo);// tratamento diferente conforme comentario acima dos construtores
 	}
 
 	public void setTipo(TipoCliente tipo) {
-		this.tipo = tipo.getCod();
+		this.tipo = tipo.getCod();// tratamento diferente conforme comentario acima dos construtores
 	}
 
 	public List<Endereco> getEnderecos() {
@@ -107,14 +109,14 @@ public class Cliente implements Serializable {
 	public void setTelefones(Set<String> telefones) {
 		this.telefones = telefones;
 	}
-/*	public List<Pedido> getPedidos() {
+	public List<Pedido> getPedidos() {
 		return pedidos;
 	}
 
 	public void setPedidos(List<Pedido> pedidos) {
 		this.pedidos = pedidos;
 	}
-*/
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
